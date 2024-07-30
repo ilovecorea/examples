@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: petstore
+      POSTGRES_USER: petstore
+      POSTGRES_PASSWORD: petstore
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  flyway:
+    image: flyway/flyway:7.11.4
+    platform: linux/amd64
+    command: -url=jdbc:postgresql://db:5432/petstore -schemas=public -user=petstore -password=petstore -connectRetries=60 migrate
+    volumes:
+      - ./sql:/flyway/sql
+    depends_on:
+      - db
+
+volumes:
+  data:
