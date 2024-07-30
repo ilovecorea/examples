@@ -1,0 +1,25 @@
+extends:
+  - recommended  # 'recommended' 기본 규칙 세트를 확장합니다.
+
+apis:
+  board@v1:  # 'board' API의 v1 버전에 대한 설정을 정의합니다.
+    root: ./openapi/openapi.yml  # OpenAPI 스펙 파일의 경로입니다.
+    rules:
+      no-ambiguous-paths: error  # 모호한 경로가 없는지 확인하는 규칙을 오류로 설정합니다.
+      no-server-example.com: off  # 서버 URL이 example.com으로 설정되지 않도록 하는 규칙을 비활성화합니다.
+      tag-description: off  # 태그 설명이 필요한지 여부를 결정하는 규칙을 비활성화합니다.
+      operation-summary: error  # 각 작업에 요약 설명이 있는지 확인하는 규칙을 오류로 설정합니다.
+      no-unresolved-refs: error  # 해결되지 않은 참조가 없는지 확인하는 규칙을 오류로 설정합니다.
+      no-unused-components: error  # 사용되지 않는 컴포넌트가 없는지 확인하는 규칙을 오류로 설정합니다.
+      operation-2xx-response: error  # 모든 작업이 2xx 응답을 포함하는지 확인하는 규칙을 오류로 설정합니다.
+      operation-operationId: error  # 모든 작업에 고유한 operationId가 있는지 확인하는 규칙을 오류로 설정합니다.
+      operation-singular-tag: error  # 각 작업이 단일 태그로만 그룹화되어 있는지 확인하는 규칙을 오류로 설정합니다.
+      no-enum-type-mismatch: error  # Enum 타입이 일치하는지 확인하는 규칙을 오류로 설정합니다.
+      no-identical-paths: error  # 동일한 경로가 중복되지 않도록 하는 규칙을 오류로 설정합니다.
+
+theme:
+  openapi:
+    schemaExpansionLevel: 2  # 스키마가 두 번째 레벨까지 기본적으로 확장되도록 설정합니다.
+    generateCodeSamples:
+      languages:
+        - lang: curl  # 코드 샘플에 사용할 언어로 'curl'을 지정합니다.

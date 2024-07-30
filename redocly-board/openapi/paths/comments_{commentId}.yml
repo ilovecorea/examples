@@ -1,0 +1,73 @@
+get:
+  tags:
+    - Comments
+  x-handler-group: comments
+  summary: Get a comment by ID
+  operationId: GetComment
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: commentId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A single comment
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Comment.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+put:
+  tags:
+    - Comments
+  x-handler-group: comments
+  summary: Update a comment by ID
+  operationId: UpdateComment
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: commentId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CommentUpdate.yml
+  responses:
+    '200':
+      description: Comment updated
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+delete:
+  tags:
+    - Comments
+  x-handler-group: comments
+  summary: Delete a comment by ID
+  operationId: DeleteComment
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: commentId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: Comment deleted
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
