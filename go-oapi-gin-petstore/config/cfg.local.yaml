@@ -1,0 +1,6 @@
+database:
+  host: localhost
+  username: petstore
+  password: petstore
+  name: petstore
+  port: 5432

@@ -1,4 +1,4 @@
 package: api
 generate:
   models: true
-output: petstore-types.gen.go
+output: ./api/petstore-types.gen.go

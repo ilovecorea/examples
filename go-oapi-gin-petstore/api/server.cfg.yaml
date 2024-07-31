@@ -2,4 +2,4 @@ package: api
 generate:
   gin-server: true
   embedded-spec: true
-output: petstore-server.gen.go
+output: ./api/petstore-server.gen.go
