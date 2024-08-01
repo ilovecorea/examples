@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -10,6 +11,7 @@ import (
 )
 
 func TestInitConfig(t *testing.T) {
+	helper.InitializeLogger()
 	// 환경 변수를 설정합니다.
 	os.Setenv("GO_PROFILE", "local")
 	defer os.Unsetenv("GO_PROFILE")
@@ -25,6 +27,9 @@ func TestInitConfig(t *testing.T) {
 	// 설정 값을 테스트합니다.
 	expectedProfile := "local"
 	actualProfile := viper.GetString("GO_PROFILE")
+	log.Debug().
+		Str("actualProfile", actualProfile).
+		Msg("Config")
 	assert.Equal(t, expectedProfile, actualProfile, "프로파일 이름이 일치하지 않습니다.")
 
 	expectedConfigValue := "localhost"
