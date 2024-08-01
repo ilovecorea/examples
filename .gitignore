@@ -326,4 +326,9 @@ gradle-app.setting
 hs_err_pid*
 replay_pid*
 
-/postgres-petstore/data/
+# Ignore all data directories
+**/data/
+# Ignore all pg_data directories
+**/pg_data/
+# Ignore all .mvn directories
+**/.mvn/

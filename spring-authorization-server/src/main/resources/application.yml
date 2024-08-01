@@ -1,0 +1,69 @@
+server:
+  port: ${SERVER_PORT:9000}  # 애플리케이션 서버 포트 설정
+
+spring:
+  application:
+    name: spring-authorization-server  # 애플리케이션 이름 설정
+  jpa:
+    show-sql: true  # 쿼리 로그 출력
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    hikari:
+      maximum-pool-size: ${POOL_SIZE:5}  # HikariCP 커넥션 풀의 최대 풀 크기 설정
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/auth}  # PostgreSQL 데이터베이스 URL 설정
+    username: ${POSTGRES_USER:user}  # 데이터베이스 사용자 이름 설정
+    password: ${POSTGRES_PASS:password}  # 데이터베이스 비밀번호 설정
+    driver-class-name: org.postgresql.Driver  # PostgreSQL JDBC 드라이버 클래스 설정
+    jdbc-url: ${spring.datasource.url}  # jdbcUrl is required with driverClassName 에러 방지
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: http://localhost:${SERVER_PORT:9000}
+        jwk-set-endpoint: /oauth2/jwks
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics  # 관리 엔드포인트 노출 설정
+
+logging:
+  level:
+    root: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  docker:
+    compose:
+      enabled: true  # Docker Compose를 활성화합니다.
+      profiles:
+        active: postgres  # 활성화할 Docker Compose 프로파일을 지정합니다. 여기서는 postgres 프로파일을 활성화합니다.
+      skip:
+        in-tests: false  # 테스트 시 Docker Compose를 건너뛰지 않도록 설정합니다.
+      lifecycle-management: start-and-stop  # start-and-stop은 애플리케이션 시작 시 Docker Compose를 시작하고, 종료 시 정지합니다.
+  flyway:
+    enabled: true  # Flyway 사용 여부 설정
+    baseline-on-migrate: true  # Flyway가 스키마 마이그레이션을 시작하기 전에 baseline 마이그레이션을 수행
+    locations: classpath:db/migration  # 마이그레이션 파일 경로 설정
+    validate-on-migrate: true  # 마이그레이션 전에 유효성 검사
+
+---
+spring:
+  config:
+    activate:
+      on-profile: debug
+
+logging:
+  level:
+    root: INFO
+    ricky.oidc: DEBUG
+    org.springframework.security: TRACE
+    org.springframework.web: DEBUG
+    java.sql: DEBUG
+    jdbc.resultset: DEBUG
+    jdbc.resultsettable: DEBUG
