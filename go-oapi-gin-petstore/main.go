@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-oapi-gin-petstore/api"
@@ -32,5 +33,21 @@ func NewGinPetServer(petStore *api.PetStore, port string) *http.Server {
 }
 
 func main() {
+	// 설정 초기화
 	config.InitConfig()
+
+	// 데이터베이스 초기화
+	config.InitDB()
+
+	// PetStore 인스턴스 생성
+	petStore := api.NewPetStore(config.DB)
+
+	// Gin 서버 생성
+	server := NewGinPetServer(petStore, "8080")
+
+	// 서버 시작
+	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		fmt.Fprintf(os.Stderr, "Server error: %s\n", err)
+		os.Exit(1)
+	}
 }
