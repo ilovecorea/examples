@@ -3,6 +3,8 @@ package api
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
+	"go-oapi-gin-petstore/config"
+	"go-oapi-gin-petstore/model"
 	"gorm.io/gorm"
 	"net/http"
 )
@@ -13,8 +15,8 @@ type PetStore struct {
 }
 
 // NewPetStore 생성자 함수
-func NewPetStore(db *gorm.DB) *PetStore {
-	return &PetStore{DB: db}
+func NewPetStore() *PetStore {
+	return &PetStore{DB: config.DB}
 }
 
 // FindPets 메서드 구현
@@ -48,11 +50,16 @@ func (p PetStore) AddPet(c *gin.Context) {
 		return
 	}
 
-	if err := p.DB.Create(&newPet).Error; err != nil {
+	pet := model.Pet{
+		Name: newPet.Name,
+		Tag:  newPet.Tag,
+	}
+
+	if err := p.DB.Create(&pet).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, Error{Code: http.StatusInternalServerError, Message: err.Error()})
 		return
 	}
-	c.JSON(http.StatusCreated, newPet)
+	c.JSON(http.StatusCreated, pet)
 }
 
 // DeletePet 메서드 구현

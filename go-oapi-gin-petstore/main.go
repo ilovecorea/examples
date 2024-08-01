@@ -40,7 +40,7 @@ func main() {
 	config.InitDB()
 
 	// PetStore 인스턴스 생성
-	petStore := api.NewPetStore(config.DB)
+	petStore := api.NewPetStore()
 
 	// Gin 서버 생성
 	server := NewGinPetServer(petStore, "8080")

@@ -38,7 +38,8 @@ func TestInitConfig(t *testing.T) {
 }
 
 func TestInitDBWithTestContainers(t *testing.T) {
-	helper.StartComposeServices(t, "../../postgres-petstore/docker-compose.yml")
+	path := "../../postgres-petstore/docker-compose.yml"
+	helper.StartComposeServices(t, path)
 	InitConfig()
 	InitDB()
 	require.NotNil(t, DB, "DB를 초기화해야 합니다")
