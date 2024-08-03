@@ -6,11 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-oapi-gin-petstore/api"
 	"go-oapi-gin-petstore/config"
+	"go-oapi-gin-petstore/middleware"
 	"net"
 	"net/http"
 	"os"
 
-	middleware "github.com/oapi-codegen/gin-middleware"
+	gin_middleware "github.com/oapi-codegen/gin-middleware"
 )
 
 func NewGinPetServer(petStore *api.PetStore, port string) *http.Server {
@@ -22,7 +23,11 @@ func NewGinPetServer(petStore *api.PetStore, port string) *http.Server {
 
 	swagger.Servers = nil
 	r := gin.Default()
-	r.Use(middleware.OapiRequestValidator(swagger))
+	r.Use(gin_middleware.OapiRequestValidator(swagger))
+	// Add jwt middleware
+	r.Use(middleware.AuthMiddleware)
+	// Add logging middleware
+	r.Use(middleware.RequestLoggerMiddleware)
 	api.RegisterHandlers(r, petStore)
 
 	s := &http.Server{
