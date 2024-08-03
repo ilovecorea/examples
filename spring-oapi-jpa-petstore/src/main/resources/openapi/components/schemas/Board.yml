@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    type: integer
+    description: "게시판을 위한 고유 식별자"
+  name:
+    type: string
+    description: "게시판의 이름"
+  description:
+    type: string
+    description: "게시판의 설명"
+  created_at:
+    type: string
+    format: date-time
+    description: "게시판이 생성된 날짜와 시간"
+  updated_at:
+    type: string
+    format: date-time
+    description: "게시판이 마지막으로 업데이트된 날짜와 시간"

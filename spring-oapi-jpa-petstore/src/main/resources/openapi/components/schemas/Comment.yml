@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: integer
+    description: "댓글을 위한 고유 식별자"
+  post_id:
+    type: integer
+    description: "댓글이 속한 게시글의 식별자"
+  user_id:
+    type: integer
+    description: "댓글을 작성한 사용자의 식별자"
+  content:
+    type: string
+    description: "댓글의 내용"
+  created_at:
+    type: string
+    format: date-time
+    description: "댓글이 생성된 날짜와 시간"
+  updated_at:
+    type: string
+    format: date-time
+    description: "댓글이 마지막으로 업데이트된 날짜와 시간"

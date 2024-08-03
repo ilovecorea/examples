@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-oapi-jpa-petstore
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        one-indexed-parameters: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  show-actuator: true
+
+logging:
+  level:
+    root: INFO
+    p6spy: WARN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, openapi, swagger-ui
+  endpoint:
+    health:
+      show-details: always
+  security:
+    enabled: false

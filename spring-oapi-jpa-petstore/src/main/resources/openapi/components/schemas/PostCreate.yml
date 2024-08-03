@@ -1,0 +1,15 @@
+type: object
+properties:
+  board_id:
+    type: integer
+    description: "게시글이 생성될 게시판의 식별자"
+  title:
+    type: string
+    description: "새로운 게시글의 제목"
+  content:
+    type: string
+    description: "새로운 게시글의 내용"
+required:
+  - board_id
+  - title
+  - content

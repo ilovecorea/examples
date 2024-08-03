@@ -1,0 +1,73 @@
+get:
+  tags:
+    - Users
+  x-handler-group: users
+  summary: Get a user by ID
+  operationId: GetUser
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A single user
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+put:
+  tags:
+    - Users
+  x-handler-group: users
+  summary: Update a user by ID
+  operationId: UpdateUser
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserUpdate.yml
+  responses:
+    '200':
+      description: User updated
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+delete:
+  tags:
+    - Users
+  x-handler-group: users
+  summary: Delete a user by ID
+  operationId: DeleteUser
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: User deleted
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml

@@ -1,0 +1,71 @@
+get:
+  tags:
+    - Posts
+  x-handler-group: posts
+  summary: Get a post by ID
+  operationId: GetPost
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A single post
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Post.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+put:
+  tags:
+    - Posts
+  x-handler-group: posts
+  summary: Update a post by ID
+  operationId: UpdatePost
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostUpdate.yml
+  responses:
+    '200':
+      description: Post updated
+    '404':
+      description: Post not found
+delete:
+  tags:
+    - Posts
+  x-handler-group: posts
+  summary: Delete a post by ID
+  operationId: DeletePost
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: Post deleted
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml

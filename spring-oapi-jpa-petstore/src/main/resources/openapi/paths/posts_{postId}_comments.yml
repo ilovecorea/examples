@@ -1,0 +1,58 @@
+get:
+  tags:
+    - Comments
+  x-handler-group: comments
+  summary: Get all comments on a post
+  operationId: GetComments
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A list of comments
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Comment.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+post:
+  tags:
+    - Comments
+  x-handler-group: comments
+  summary: Create a new comment on a post
+  operationId: CreateComment
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CommentCreate.yml
+  responses:
+    '201':
+      description: Comment created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Comment.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
