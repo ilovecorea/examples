@@ -1,5 +1,5 @@
 services:
-  postgres:
+  db:
     image: postgres:16.3
     environment:
       POSTGRES_DB: forum
@@ -8,4 +8,12 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - ./db/data:/var/lib/postgresql/data
+  flyway:
+    image: flyway/flyway:7.11.4
+    platform: linux/amd64
+    command: -url=jdbc:postgresql://db:5432/forum -schemas=public -user=forum -password=forum -connectRetries=60 migrate
+    volumes:
+      - ./db/migration:/flyway/sql
+    depends_on:
+      - db

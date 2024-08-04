@@ -1,0 +1,6 @@
+name: sort
+in: query
+required: false
+schema:
+  type: string
+description: "정렬 기준 (형식: property(,asc|desc))"

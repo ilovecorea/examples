@@ -246,7 +246,7 @@
                 <argument>--output</argument>
                 <argument>src/main/resources/bundle.yaml</argument>
                 <argument>--ext</argument>
-                <argument>json</argument>
+                <argument>yaml</argument>
               </arguments>
             </configuration>
           </execution>
@@ -280,13 +280,13 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>src/main/resources/openapi.json</inputSpec>
+              <inputSpec>src/main/resources/bundle.yaml</inputSpec>
               <generatorName>spring</generatorName>
               <library>spring-boot</library>
               <modelNameSuffix>DTO</modelNameSuffix>
-              <apiPackage>ricky.examples.petstore.api</apiPackage>
+              <apiPackage>forum.api</apiPackage>
               <generateModels>true</generateModels>
-              <modelPackage>ricky.examples.petstore.dto</modelPackage>
+              <modelPackage>forum.dto</modelPackage>
               <generateApis>true</generateApis>
               <output>${project.basedir}/src/gen</output>
               <additionalProperties>removeEnumValuePrefix=false</additionalProperties>

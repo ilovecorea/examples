@@ -1,4 +1,4 @@
-package ricky.examples.petstore;
+package ricky.examples.forum;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

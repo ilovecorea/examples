@@ -1,0 +1,6 @@
+name: search
+in: query
+required: false
+schema:
+  type: string
+description: 검색 키워드

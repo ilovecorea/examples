@@ -1,0 +1,7 @@
+name: page
+in: query
+required: false
+schema:
+  type: integer
+  default: 0
+description: 페이지 번호

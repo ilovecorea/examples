@@ -1,9 +1,0 @@
-- name: search
-  in: query
-  required: false
-  schema:
-    type: string
-  description: |
-    Search criteria with sort in the format: field:value,field:value;sortField:asc/desc. 
-    Example: name:john,description:admin;created_at:desc. 
-    Supports multiple fields and sorting.

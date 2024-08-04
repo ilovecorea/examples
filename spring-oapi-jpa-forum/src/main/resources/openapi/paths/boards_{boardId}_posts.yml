@@ -7,8 +7,10 @@ get:
   security:
     - BearerAuth: []
   parameters:
-    - $ref: ../components/parameters/PageRequest.yml
-    - $ref: ../components/parameters/SearchWithSort.yml
+    - $ref: ../components/parameters/Page.yml
+    - $ref: ../components/parameters/Size.yml
+    - $ref: ../components/parameters/Sort.yml
+    - $ref: ../components/parameters/Search.yml
   responses:
     '200':
       description: A list of posts

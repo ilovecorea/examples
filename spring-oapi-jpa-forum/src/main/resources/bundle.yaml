@@ -33,20 +33,10 @@ paths:
       security:
         - BearerAuth: []
       parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 0
-          description: Page number for pagination
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 10
-          description: Page size for pagination
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Search'
       responses:
         '200':
           description: A list of users
@@ -173,21 +163,6 @@ paths:
       operationId: GetBoards
       security:
         - BearerAuth: []
-      parameters:
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 0
-          description: Page number for pagination
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 10
-          description: Page size for pagination
       responses:
         '200':
           description: A list of boards
@@ -315,25 +290,10 @@ paths:
       security:
         - BearerAuth: []
       parameters:
-        - name: boardId
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 0
-          description: Page number for pagination
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 10
-          description: Page size for pagination
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Search'
       responses:
         '200':
           description: A list of posts
@@ -341,7 +301,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/Pageable'
+                  - $ref: '#/components/schemas/PageResponse'
                   - type: object
                     properties:
                       content:
@@ -470,34 +430,17 @@ paths:
           required: true
           schema:
             type: integer
-        - name: page
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 0
-          description: Page number for pagination
-        - name: size
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 10
-          description: Page size for pagination
       responses:
         '200':
           description: A list of comments
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/Pageable'
-                  - type: object
-                    properties:
-                      content:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Comment'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -613,56 +556,127 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: 페이지 번호
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: 페이지 크기
+    Sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: '정렬 기준 (형식: property(,asc|desc))'
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 검색 키워드
   schemas:
     Sort:
       type: object
+      description: 정렬 정보를 나타내는 객체입니다.
       properties:
         sorted:
           type: boolean
+          description: 정렬 여부를 나타냅니다.
         unsorted:
           type: boolean
+          description: 비정렬 여부를 나타냅니다.
         empty:
           type: boolean
-    Pageable:
-      type: object
-      properties:
-        sort:
-          $ref: '#/components/schemas/Sort'
-        offset:
-          type: integer
-        pageNumber:
-          type: integer
-        pageSize:
-          type: integer
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
+          description: 정렬 기준이 비어있는지 여부를 나타냅니다.
+        orders:
+          type: array
+          description: 정렬 기준 목록을 나타냅니다.
+          items:
+            type: object
+            description: 정렬 기준 객체입니다.
+            properties:
+              property:
+                type: string
+                description: 정렬할 속성의 이름입니다.
+              direction:
+                type: string
+                description: 정렬 방향 (ASC 또는 DESC)을 나타냅니다.
+              ignoreCase:
+                type: boolean
+                description: 대소문자를 무시할지 여부를 나타냅니다.
+              nullHandling:
+                type: string
+                description: 널 값 처리 방식을 나타냅니다.
+              ascending:
+                type: boolean
+                description: 오름차순 정렬 여부를 나타냅니다.
+              descending:
+                type: boolean
+                description: 내림차순 정렬 여부를 나타냅니다.
+      required:
+        - sorted
+        - unsorted
+        - empty
     PageResponse:
       type: object
+      description: 페이지 응답 정보를 나타내는 객체입니다.
       properties:
         content:
           type: array
+          description: 현재 페이지의 데이터 목록입니다.
           items:
             type: object
-        pageable:
-          $ref: '#/components/schemas/Pageable'
-        totalElements:
-          type: integer
         totalPages:
           type: integer
-        last:
-          type: boolean
-        first:
-          type: boolean
-        numberOfElements:
+          description: 총 페이지 수를 나타냅니다.
+        totalElements:
           type: integer
-        size:
-          type: integer
+          description: 총 데이터 개수를 나타냅니다.
         number:
           type: integer
+          description: 현재 페이지 번호를 나타냅니다.
+        size:
+          type: integer
+          description: 페이지 크기를 나타냅니다.
+        numberOfElements:
+          type: integer
+          description: 현재 페이지의 데이터 개수를 나타냅니다.
+        first:
+          type: boolean
+          description: 첫 번째 페이지 여부를 나타냅니다.
+        last:
+          type: boolean
+          description: 마지막 페이지 여부를 나타냅니다.
         empty:
           type: boolean
+          description: 페이지가 비어있는지 여부를 나타냅니다.
+        sort:
+          $ref: '#/components/schemas/Sort'
+          description: 정렬 정보를 나타냅니다.
+      required:
+        - content
+        - totalPages
+        - totalElements
+        - number
+        - size
+        - numberOfElements
+        - first
+        - last
+        - empty
+        - sort
     User:
       type: object
       properties:
