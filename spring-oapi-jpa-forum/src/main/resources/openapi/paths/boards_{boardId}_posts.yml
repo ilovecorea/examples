@@ -1,0 +1,60 @@
+get:
+  tags:
+    - Posts
+  x-handler-group: posts
+  summary: Get all posts in a board
+  operationId: GetBoardPosts
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../components/parameters/PageRequest.yml
+    - $ref: ../components/parameters/SearchWithSort.yml
+  responses:
+    '200':
+      description: A list of posts
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PageResponse.yml
+              - type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: ../components/schemas/Post.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+post:
+  tags:
+    - Posts
+  x-handler-group: posts
+  summary: Create a new post in a board
+  operationId: CreateBoardPost
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: boardId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PostCreate.yml
+  responses:
+    '201':
+      description: Post created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Post.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml

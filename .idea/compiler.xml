@@ -16,7 +16,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for spring-oapi-jpa-petstore" enabled="true">
+      <profile name="Annotation profile for spring-oapi-jpa-forum" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -25,19 +25,25 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
         </processorPath>
-        <module name="spring-oapi-jpa-petstore" />
+        <module name="spring-oapi-jpa-forum" />
         <module name="spring-authorization-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="spring-authorization-server.main" target="17" />
       <module name="spring-authorization-server.test" target="17" />
+      <module name="spring-oapi-jpa-petstore" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="spring-authorization-server" options="-J-XX:+EnableDynamicAgentLoading" />
+      <module name="spring-oapi-jpa-forum" options="-J-XX:+EnableDynamicAgentLoading" />
       <module name="spring-oapi-jpa-petstore" options="-J-XX:+EnableDynamicAgentLoading" />
     </option>
   </component>

@@ -1,8 +1,0 @@
-type: object
-properties:
-  title:
-    type: string
-    description: "게시글의 새로운 제목"
-  content:
-    type: string
-    description: "게시글의 새로운 내용"

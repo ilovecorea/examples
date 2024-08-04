@@ -1,0 +1,54 @@
+get:
+  summary: Get all users
+  operationId: GetUsers
+  tags:
+    - Users
+  x-handler-group: users
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../components/parameters/PageRequest.yml
+    - $ref: ../components/parameters/SearchWithSort.yml
+  responses:
+    '200':
+      description: A list of users
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/PageResponse.yml
+              - type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: ../components/schemas/User.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+post:
+  tags:
+    - Users
+  x-handler-group: users
+  summary: Create a new user
+  operationId: CreateUser
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserCreate.yml
+  responses:
+    '201':
+      description: User created
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml

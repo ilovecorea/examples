@@ -1,0 +1,25 @@
+type: object
+properties:
+  id:
+    type: integer
+    description: 게시글을 위한 고유 식별자
+  board_id:
+    type: integer
+    description: 게시글이 속한 게시판의 식별자
+  user_id:
+    type: integer
+    description: 게시글을 작성한 사용자의 식별자
+  title:
+    type: string
+    description: 게시글의 제목
+  content:
+    type: string
+    description: 게시글의 내용
+  created_at:
+    type: string
+    format: date-time
+    description: 게시글이 생성된 날짜와 시간
+  updated_at:
+    type: string
+    format: date-time
+    description: 게시글이 마지막으로 업데이트된 날짜와 시간

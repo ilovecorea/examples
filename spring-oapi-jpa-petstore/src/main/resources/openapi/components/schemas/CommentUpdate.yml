@@ -1,5 +1,0 @@
-type: object
-properties:
-  content:
-    type: string
-    description: "댓글의 새로운 내용"

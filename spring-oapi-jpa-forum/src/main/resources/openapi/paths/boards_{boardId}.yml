@@ -1,0 +1,73 @@
+get:
+  tags:
+    - Boards
+  x-handler-group: boards
+  summary: Get a board by ID
+  operationId: GetBoard
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: boardId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: A single board
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Board.yml
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+put:
+  tags:
+    - Boards
+  x-handler-group: boards
+  summary: Update a board by ID
+  operationId: UpdateBoard
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: boardId
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/BoardUpdate.yml
+  responses:
+    '200':
+      description: Board updated
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml
+delete:
+  tags:
+    - Boards
+  x-handler-group: boards
+  summary: Delete a board by ID
+  operationId: DeleteBoard
+  security:
+    - BearerAuth: []
+  parameters:
+    - name: boardId
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: Board deleted
+    '400':
+      $ref: ../components/responses/BadRequest.yml
+    '404':
+      $ref: ../components/responses/NotFound.yml

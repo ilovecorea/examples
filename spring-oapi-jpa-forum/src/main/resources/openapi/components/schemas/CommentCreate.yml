@@ -1,0 +1,11 @@
+type: object
+properties:
+  post_id:
+    type: integer
+    description: 댓글이 작성될 게시글의 식별자
+  content:
+    type: string
+    description: 새로운 댓글의 내용
+required:
+  - post_id
+  - content

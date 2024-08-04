@@ -1,0 +1,41 @@
+type: object
+description: "정렬 정보를 나타내는 객체입니다."
+properties:
+  sorted:
+    type: boolean
+    description: "정렬 여부를 나타냅니다."
+  unsorted:
+    type: boolean
+    description: "비정렬 여부를 나타냅니다."
+  empty:
+    type: boolean
+    description: "정렬 기준이 비어있는지 여부를 나타냅니다."
+  orders:
+    type: array
+    description: "정렬 기준 목록을 나타냅니다."
+    items:
+      type: object
+      description: "정렬 기준 객체입니다."
+      properties:
+        property:
+          type: string
+          description: "정렬할 속성의 이름입니다."
+        direction:
+          type: string
+          description: "정렬 방향 (ASC 또는 DESC)을 나타냅니다."
+        ignoreCase:
+          type: boolean
+          description: "대소문자를 무시할지 여부를 나타냅니다."
+        nullHandling:
+          type: string
+          description: "널 값 처리 방식을 나타냅니다."
+        ascending:
+          type: boolean
+          description: "오름차순 정렬 여부를 나타냅니다."
+        descending:
+          type: boolean
+          description: "내림차순 정렬 여부를 나타냅니다."
+required:
+  - sorted
+  - unsorted
+  - empty

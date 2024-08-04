@@ -1,0 +1,8 @@
+type: object
+properties:
+  name:
+    type: string
+    description: 게시판의 새로운 이름
+  description:
+    type: string
+    description: 게시판의 새로운 설명

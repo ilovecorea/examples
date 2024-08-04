@@ -332,3 +332,4 @@ replay_pid*
 **/pg_data/
 # Ignore all .mvn directories
 **/.mvn/
+**/gen/

@@ -9,6 +9,7 @@
       <list>
         <option value="$PROJECT_DIR$/spring-authorization-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-oapi-jpa-petstore/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-oapi-jpa-forum/pom.xml" />
       </list>
     </option>
   </component>

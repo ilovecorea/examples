@@ -6,7 +6,7 @@
   <groupId>ricky.examples</groupId>
   <artifactId>spring-authorization-server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>demo</name>
+  <name>spring-authorization-server</name>
   <description>Spring authorization server project for Spring Boot</description>
   <licenses>
     <license />
