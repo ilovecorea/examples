@@ -15,24 +15,19 @@ spring:
     url: jdbc:postgresql://localhost:5432/forum
     username: forum
     password: forum
+  jpa:
+    show-sql: false
+
+decorator:
+  datasource:
     p6spy:
       enable-logging: true
-      multiline: true
-      logging: slf4j
-      tracing:
-        include-parameter-values: true
-jpa:
-  show-sql: false
-  properties:
-    hibernate:
-      format_sql: false
 
 logging:
   level:
     root: INFO
-    ricky.examples.petstore: DEBUG
+    ricky.examples.forum: DEBUG
     org.springframework.security: TRACE
-    org.springframework.security.access.intercept: DEBUG
     org.springframework.web: DEBUG
     org.hibernate.SQL: OFF
     org.hibernate.type.descriptor.sql.BasicBinder: OFF
